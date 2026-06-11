@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100 font-sans;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+}
+
+/* Sprite sheet idle animation — 3 frames horizontal (1536×512) */
+@keyframes sprite-idle {
+  0%   { background-position-x: 0px; }
+  33%  { background-position-x: 0px; }
+  34%  { background-position-x: -200px; }
+  66%  { background-position-x: -200px; }
+  67%  { background-position-x: -400px; }
+  99%  { background-position-x: -400px; }
+  100% { background-position-x: 0px; }
+}
+
+.sprite-idle-anim {
+  background-repeat: no-repeat;
+  background-size: 600px 200px; /* 3 × 200px = 600px wide, displayed at 200px tall */
+  background-position-x: 0px;
+  background-position-y: 0px;
+  animation: sprite-idle 1.2s steps(1, end) infinite;
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 20px currentColor;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
+  }
+}

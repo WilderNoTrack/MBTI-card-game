@@ -37,6 +37,33 @@ const OUT = path.join(__dirname, '..', 'public', 'screenshots');
   await page.screenshot({ path: path.join(OUT, 'home-rules.png') });
   console.log('saved home-rules.png');
 
+  // 5. Create a room as host, go through lobby -> setup
+  await page.getByRole('button', { name: '创建房间' }).click();
+  await page.waitForTimeout(300);
+  await page.getByPlaceholder('起个名字吧').fill('演示玩家');
+  await page.getByRole('button', { name: '创建房间' }).click();
+  await page.waitForURL(/\/lobby$/, { timeout: 30000 });
+  await page.waitForTimeout(800);
+
+  await page.getByRole('button', { name: '开始游戏' }).click();
+  await page.waitForURL(/\/setup$/, { timeout: 30000 });
+  await page.waitForTimeout(800);
+  await page.screenshot({ path: path.join(OUT, 'setup.png') });
+  console.log('saved setup.png');
+
+  // 6. Pick an MBTI type and confirm
+  await page.getByRole('button', { name: /^INFP/ }).click();
+  await page.waitForTimeout(300);
+  await page.getByRole('button', { name: '确认选择' }).click();
+  await page.waitForTimeout(800);
+
+  // 7. Force-start to skip waiting for other players, then screenshot the play page
+  await page.getByRole('button', { name: /强制开始/ }).click();
+  await page.waitForURL(/\/play$/, { timeout: 30000 });
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: path.join(OUT, 'play.png') });
+  console.log('saved play.png');
+
   await browser.close();
 })().catch(err => {
   console.error('Screenshot script failed:', err);

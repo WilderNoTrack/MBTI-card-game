@@ -34,6 +34,10 @@
 
 ![规则面板展开](public/screenshots/home-rules.png)
 
+| 选择 MBTI 人格 | 对战界面 |
+|---|---|
+| ![选择人格](public/screenshots/setup.png) | ![对战界面](public/screenshots/play.png) |
+
 ---
 
 ## 项目简介
